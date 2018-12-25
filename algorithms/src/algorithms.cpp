@@ -13,7 +13,8 @@
 int main() {
 	std::cout << "Algorithms 101 project" << std::endl;
 
-	graphs::Graph mygraph;
+	graphs::Graph mygraph(graphs::ADJACENCY_LIST);
+	graphs::Graph mygraph2(graphs::ADJACENCY_MATRIX);
 
 	return 0;
 }

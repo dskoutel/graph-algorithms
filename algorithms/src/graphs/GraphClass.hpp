@@ -4,12 +4,16 @@
 
 namespace graphs {
 
+	enum GraphReprType {
+		ADJACENCY_MATRIX, ADJACENCY_LIST
+	};
+
 	class Graph {
 		public:
-			Graph();
+			Graph( GraphReprType tp );
 			~Graph();
 		private:
-			void test();
+			class GraphRepresentation *m_repr;
 	};
 
 };
