@@ -7,14 +7,14 @@
 //============================================================================
 
 #include <iostream>
-
 #include "graphs/GraphClass.hpp"
+#include "utilities/Timer.hpp"
 
-int main() {
-	std::cout << "Algorithms 101 project" << std::endl;
-
-	graphs::Graph mygraph(graphs::ADJACENCY_LIST);
-	graphs::Graph mygraph2(graphs::ADJACENCY_MATRIX);
-
-	return 0;
+int main()
+{
+	profile::Timer t = profile::Timer("generation");
+	for( int i = 0 ; i < 10; i++ ) {
+		graphs::Graph graph1(graphs::ADJACENCY_MATRIX);
+		graphs::Graph graph2(graphs::ADJACENCY_LIST);
+	}
 }
