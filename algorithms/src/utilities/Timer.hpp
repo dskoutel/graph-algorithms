@@ -4,6 +4,7 @@
 #include <chrono>
 #include <ctime>
 #include <string>
+#include <stack>
 
 typedef std::chrono::time_point<std::chrono::system_clock> timeInst;
 typedef std::chrono::duration<double> timeStamp;
@@ -11,17 +12,22 @@ typedef std::chrono::duration<double> timeStamp;
 namespace profile {
 
 class Timer {
-public:
-	Timer( const char *fun );
-	~Timer();
+	public:
+		Timer( const char *fun );
+		~Timer();
 
-	void timerInitInfo();
-	void timerFinitInfo();
+		void timerInitInfo();
+		void timerFinitInfo();
 
-private:
-	std::string m_fun;
-	timeInst m_start_time;
-	timeInst m_end_time;
+	private:
+		std::string m_fun;
+		timeInst m_start_time;
+		timeInst m_end_time;
+};
+
+class Profiler {
+	private:
+		std::stack<Timer> m_timers;
 };
 
 } /* namespace profile */
