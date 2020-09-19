@@ -14,7 +14,7 @@ int main()
 {
 	profile::Timer t = profile::Timer("generation");
 	for( int i = 0 ; i < 10; i++ ) {
-		graphs::Graph<graphs::AdjacencyList, int, double> graph1();
-		graphs::Graph<graphs::AdjacencyMatrix, int, double> graph2();
+		graphs::Graph<graphs::ADJACENCY_LIST, int, double> graph1();
+		graphs::Graph<graphs::ADJACENCY_TABLE, int, double> graph2();
 	}
 }

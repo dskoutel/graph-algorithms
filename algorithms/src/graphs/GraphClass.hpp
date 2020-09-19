@@ -5,15 +5,12 @@
 
 namespace graphs {
 
-	class AdjacencyList {
-
+	enum GraphRepresentationType {
+		ADJACENCY_LIST,
+		ADJACENCY_TABLE
 	};
 
-	class AdjacencyMatrix {
-
-	};
-
-	template<typename GraphReprType, typename NODE, typename WEIGHT>
+	template<GraphRepresentationType T, typename NODE, typename WEIGHT>
 	class GraphRepresentation
 	{
 		public:
@@ -21,24 +18,25 @@ namespace graphs {
 			~GraphRepresentation();
 			void addNode( NODE node );
 			void addEdge( NODE node1, NODE node2, WEIGHT w );
-			void addDirectedEdge( NODE node1, NODE node2, WEIGHT w );
 			template<typename Fun> void forEveryNode( Fun F );
 			template<typename Fun> void forEveryNeibOfNode( Fun F );
+			template<typename Fun> void forEveryEdge( Fun F );
 	};
 
-	template<typename GraphReprType, typename NODE, typename WEIGHT>
+	template<GraphRepresentationType T, typename NODE, typename WEIGHT>
 	class Graph {
 		public:
+			Graph( bool directed = false ) {
+				m_directed = directed;
+			}
+
 			void addNode( NODE node ) {
 				m_repr.addNode( node );
 			}
 			void addEdge( NODE node1, NODE node2, WEIGHT w )
 			{
 				m_repr.addEdge( node1, node2, w );
-			}
-			void addDirectedEdge( NODE node1, NODE node2, WEIGHT w )
-			{
-				m_repr.addDirectedEdge( node1, node2, w );
+				if( !m_directed ) m_repr.addEdge( node2, node1, w );
 			}
 			template<typename Fun> void forEveryNode( Fun f )
 			{
@@ -48,8 +46,13 @@ namespace graphs {
 			{
 				m_repr.forEveryNeibOfNode( f );
 			}
+			template<typename Fun> void forEveryEdge( Fun f )
+			{
+				m_repr.forEveryEdge( f );
+			}
 		private:
-			GraphRepresentation<GraphReprType,NODE,WEIGHT> m_repr;
+			GraphRepresentation<T,NODE,WEIGHT> m_repr;
+			bool m_directed;
 	};
 
 };
